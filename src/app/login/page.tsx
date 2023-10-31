@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Button } from "~/components/Button";
-import { USER_ID_COOKIE_NAME } from "~/utils/constants";
+import { GOOGLE_REDIRECT_URL, USER_ID_COOKIE_NAME } from "~/utils/constants";
 
 export default function Login() {
   const userId = cookies().get(USER_ID_COOKIE_NAME)?.value;
@@ -51,6 +51,8 @@ export default function Login() {
         <div className="flex-row flex w-full gap-2">
           <Button
             variant="secondary"
+            as="a"
+            href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile&redirect_uri=${GOOGLE_REDIRECT_URL}`}
             className="flex-1 items-center justify-center flex gap-3"
           >
             <GoogleLogo size={32} />
